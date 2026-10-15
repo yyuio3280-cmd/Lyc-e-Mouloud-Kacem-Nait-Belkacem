@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ثانوية مولود قاسم نايت بلقاسم</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1118;--glass:rgba(255,255,255,.09);--bd:rgba(186,230,253,.24);--tx:#eef6fb;--mu:#9fb0bf;--pu:#38bdf8;--pu2:#0284c7;--ok:#22c55e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{background:radial-gradient(circle at 15% 10%,#38bdf855 0,transparent 45%),radial-gradient(circle at 90% 60%,#94a3b844 0,transparent 50%),var(--bg);background-attachment:fixed;color:var(--tx);font-family:-apple-system,"SF Pro Text","Segoe UI",Tahoma,Arial,sans-serif}
+.tick{position:fixed;left:0;right:0;z-index:30;height:30px;overflow:hidden;direction:ltr;background:rgba(17,24,34,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--bd);font-size:13px;line-height:30px;color:#e0f2fe}
+.tick span{display:inline-block;white-space:nowrap;padding-left:100%;animation:mq 18s linear infinite;direction:rtl}
+@keyframes mq{to{transform:translateX(-100%)}}
+#t1{top:env(safe-area-inset-top,0px)}
+
+header{position:fixed;left:0;right:0;top:calc(30px + env(safe-area-inset-top,0px));z-index:20;height:54px;display:flex;align-items:center;justify-content:center;background:rgba(17,24,34,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
+header h1{font-size:15px;max-width:calc(100% - 200px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#stats{position:absolute;right:12px;top:0;bottom:0;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;direction:ltr}
+#stats span{display:flex;align-items:center;gap:5px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
+.dot.b{background:#38bdf8;box-shadow:0 0 8px #38bdf8}
+.dot.g{background:#22c55e;box-shadow:0 0 8px #22c55e;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+#burger{position:absolute;left:12px;top:9px;width:38px;height:36px;border-radius:12px;border:1px solid var(--bd);background:var(--glass);display:flex;flex-direction:column;justify-content:center;gap:5px;padding:0 9px;cursor:pointer;transition:transform .2s}
+#burger:active{transform:scale(0.92)}
+#burger i{display:block;height:2.5px;border-radius:2px;background:#bae6fd}
+#menu{position:fixed;left:12px;top:calc(88px + env(safe-area-inset-top,0px));z-index:40;display:none;flex-direction:column;min-width:170px;padding:6px;border-radius:18px;background:rgba(30,41,59,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--bd);animation:fadeIn .2s ease}
+#menu.on{display:flex}
+#menu button{background:none;border:0;color:var(--tx);text-align:start;padding:11px 14px;border-radius:12px;font-size:15px;cursor:pointer;transition:background .2s}
+#menu button:hover{background:rgba(255,255,255,.08)}
+#menu button.sel{background:linear-gradient(135deg,var(--pu2),var(--pu))}
+
+main{padding:calc(100px + env(safe-area-inset-top,0px)) 14px calc(110px + env(safe-area-inset-bottom,0px));max-width:720px;margin:auto;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--glass);border:1px solid var(--bd);border-radius:22px;padding:16px;margin-bottom:14px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 30px #0006;transition:transform .2s;position:relative}
+.card.pinned{border-color:var(--pu);background:rgba(56,189,248,.08)}
+.pin-badge{position:absolute;top:12px;left:16px;font-size:11px;background:var(--pu);color:#000;padding:2px 8px;border-radius:10px;font-weight:bold}
+
+.card h3{font-size:17px;margin:6px 0}
+.card p{color:#dbe7f0;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+
+.media-box{position:relative;margin-top:10px;border-radius:16px;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center}
+.media-box img,.media-box video{display:block;width:100%;max-height:400px;object-fit:cover;cursor:pointer}
+.media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px;border-radius:16px;overflow:hidden}
+.grid-item{position:relative;height:160px;background:#000;cursor:pointer;overflow:hidden}
+.grid-item img,.grid-item video{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.grid-item:hover img,.grid-item:hover video{transform:scale(1.03)}
+.grid-more{position:absolute;inset:0;background:rgba(0,0,0,0.65);display:grid;place-items:center;font-size:24px;font-weight:bold;color:#fff;backdrop-filter:blur(4px)}
+
+/* عرض الصورة الصافي مع أزرار خارجية تماماً */
+#fullscreen-view{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.95);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;animation:fadeIn .2s ease}
+#fullscreen-view.on{display:flex}
+#fs-container{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:60px 80px}
+#fs-content{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+#fs-content img,#fs-content video{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+
+#fs-close{position:absolute;top:20px;left:20px;background:rgba(255,255,255,0.15);color:#fff;border:0;border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer;z-index:102;display:grid;place-items:center;transition:background .2s}
+#fs-close:hover{background:rgba(255,255,255,0.3)}
+
+.fs-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);color:#fff;border:0;border-radius:50%;width:50px;height:50px;font-size:24px;cursor:pointer;display:grid;place-items:center;z-index:102;transition:background .2s}
+.fs-nav:hover{background:rgba(255,255,255,0.3)}
+.fs-nav.prev{right:20px}
+.fs-nav.next{left:20px}
+
+.tag{display:inline-block;font-size:12px;padding:3px 10px;border-radius:20px;background:linear-gradient(135deg,var(--pu2),var(--pu))}
+.tag.rec{background:linear-gradient(135deg,#475569,#94a3b8)}.tag.ann{background:linear-gradient(135deg,#0f766e,#5eead4);color:#042f2e}
+.meta{color:var(--mu);font-size:12px;margin-top:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button.b{border:0;border-radius:14px;padding:10px 16px;font-size:14px;color:#fff;background:linear-gradient(135deg,var(--pu2),var(--pu));cursor:pointer;transition:transform .15s}
+button.b:active{transform:scale(0.96)}
+button.b.g{background:var(--glass);border:1px solid var(--bd)}button.b.r{background:linear-gradient(135deg,#991b1b,#ef4444)}button.b.ok{background:linear-gradient(135deg,#15803d,var(--ok))}
+input,textarea,select{width:100%;margin:6px 0;padding:12px 14px;border-radius:14px;border:1px solid var(--bd);background:rgba(0,0,0,.35);color:var(--tx);font:inherit;font-size:15px;outline:none}
+label{font-size:13px;color:var(--mu)}
+h2{font-size:20px;margin:4px 0 12px}
+.done{background:linear-gradient(135deg,rgba(21,128,61,.55),rgba(34,197,94,.3));border-color:#22c55e}
+.empty{text-align:center;color:var(--mu);padding:40px 0}
+
+nav{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;justify-content:space-around;padding:8px 4px;border-radius:28px;background:rgba(30,41,59,.75);backdrop-filter:blur(26px);border:1px solid var(--bd);max-width:720px;margin:auto}
+nav button{background:none;border:0;color:var(--mu);font-size:10.5px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1}
+nav .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;box-shadow:inset 0 1px 1px #fff5,0 4px 10px #0007;transition:.2s}
+nav button.on{color:#fff}nav button.on .ic{transform:scale(1.12)}
+
+#modal{position:fixed;inset:0;z-index:60;background:#000a;display:none;align-items:flex-end;justify-content:center}
+#modal.on{display:flex}
+#sheet{width:100%;max-width:720px;max-height:90%;overflow:auto;background:rgba(30,41,59,.95);backdrop-filter:blur(26px);border:1px solid var(--bd);border-radius:28px 28px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom,0px));animation:slideUpModal .35s cubic-bezier(0.1, 0.9, 0.2, 1)}
+@keyframes slideUpModal{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(100px + env(safe-area-inset-bottom,0px));background:#0c4a6e;border:1px solid var(--pu);padding:10px 18px;border-radius:20px;z-index:80;display:none;animation:fadeIn .2s ease}
+.fab{position:fixed;z-index:25;left:16px;bottom:calc(100px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:18px;border:0;font-size:28px;color:#fff;background:linear-gradient(135deg,var(--pu2),var(--pu));box-shadow:0 8px 24px #38bdf866;cursor:pointer}
+.mlist{display:flex;flex-direction:column;gap:6px;margin:8px 0}.mi{display:flex;align-items:center;gap:8px;background:rgba(127,127,127,.12);border-radius:10px;padding:6px 8px;font-size:14px}.mi span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mi button{border:0;background:#c0392b;color:#fff;border-radius:8px;padding:4px 10px;cursor:pointer}
+#sb{position:relative}#sb svg{position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);color:var(--mu);pointer-events:none}#sb input{padding-inline-start:42px}
+.i{display:inline-block;vertical-align:-.2em;flex:none}
+#upload-progress{display:none;height:6px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden;margin:8px 0}#upload-bar{height:100%;width:0;background:var(--pu);transition:width .3s}#upload-text{font-size:12px;color:var(--mu)}
+</style>
+</head>
+<body>
+<div class="tick" id="t1"><span>ثانوية مولود قاسم نايت بلقاسم - سيدي نعمان - ولاية المدية • البريد الإلكتروني: lyceen26@gmail.com</span></div>
+<header><button id="burger" aria-label="menu"><i></i><i></i><i></i></button><h1 id="ttl">ثانوية مولود قاسم نايت بلقاسم</h1><div id="stats"><span title="عدد الزائرين"><i class="dot b"></i><em id="st-total">0</em></span><span title="النشطاء الآن"><i class="dot g"></i><em id="st-act">0</em></span></div></header>
+<div id="menu"></div>
+<main><div id="sb"><input id="q" placeholder="بحث في العنوان أو الموضوع..." autocomplete="off"></div><div id="app"></div></main>
+<nav id="nav"></nav>
+
+<div id="modal"><div id="sheet"></div></div>
+
+<div id="fullscreen-view">
+  <button id="fs-close">&times;</button>
+  <button class="fs-nav prev" id="fs-prev">&#10095;</button>
+  <button class="fs-nav next" id="fs-next">&#10094;</button>
+  <div id="fs-container">
+    <div id="fs-content"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const ls=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const ss=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+
+const API='https://school-site-api.nqatt370.workers.dev';
+let posts=[], messages=[];
+async function api(path,opt={}){
+  const h={...(opt.headers||{})};
+  if(token)h.authorization='Bearer '+token;
+  let body=opt.body;
+  if(opt.json!==undefined){h['content-type']='application/json';body=JSON.stringify(opt.json)}
+  const r=await fetch(API+path,{method:opt.method||'GET',headers:h,body});
+  const d=await r.json().catch(()=>({}));
+  if(r.status===401&&token&&path!=='/api/login'){token='';role=null;localStorage.removeItem('school_token');localStorage.removeItem('school_role');render();toast('انتهت الجلسة، سجّل الدخول من جديد')}
+  if(!r.ok)throw Object.assign(new Error(d.error||'err'),{status:r.status});
+  return d;
+}
+async function loadPosts(){try{posts=await api('/api/posts')}catch{toast('تعذّر الاتصال بالخادم')}render()}
+async function loadMessages(){
+  if(role==='modire'||role==='mostachar'){try{messages=await api('/api/messages')}catch{}}
+  else{const mine=ls('school_mine',[]);if(mine.length){try{const st=await api('/api/messages/status?ids='+mine.map(m=>m.id).join(','));ss('school_mine',mine.map(m=>({...m,done:st[m.id]??m.done})))}catch{}}}
+  render();
+}
+
+const $=id=>document.getElementById(id); 
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let token=localStorage.getItem('school_token')||'', role=localStorage.getItem('school_role')||null, tab='home', flt='all', delId=null;
+
+const T={home:'الرئيسية',couns:'المستشار',comp:'شكوى',act:'تفعيل',subs:'الإرسالات',all:'الكل',post:'منشور',rec:'توصية',ann:'إعلان',title:'العنوان (اختياري)',topic:'الموضوع (اختياري)',media:'صور وفيديوهات',type:'التصنيف (إجباري)',pick:'اختر التصنيف',publish:'نشر',save:'حفظ',cancel:'إلغاء',name:'الاسم',sname:'اللقب',cls:'القسم',phone:'رقم الهاتف (اختياري)',msg:'رسالتك أو تساؤلك',send:'إرسال',csend:'إرسال الشكوى للمدير',ctitle:'رسالة إلى المستشار',cmtitle:'رفع شكوى للمدير',code:'رمز التفعيل',enter:'دخول',logout:'تسجيل الخروج',role:'الصلاحية الحالية',edit:'تعديل',del:'حذف',sure:'تأكيد الحذف؟',empty:'لا يوجد شيء بعد',sent:'تم الإرسال',bad:'رمز غير صحيح',req:'الحقول المطلوبة ناقصة',newp:'منشور جديد',none:'لا توجد إرسالات',kc:'رسالة للمستشار',kp:'شكوى',student:'تلميذ',up:'جارٍ الرفع...',nomsg:'لا تملك صلاحية عرض الرسائل'};
+const t=k=>T[k]||k; const fmt=ts=>ts?new Date(ts).toLocaleString('ar-DZ'):'';
+function toast(m){const e=$('toast');e.textContent=m;e.style.display='block';setTimeout(()=>e.style.display='none',2500)}
+
+const ICONS={"home": "<path d=\"M3 10.5 12 3l9 7.5\"/><path d=\"M5 9.5V20h14V9.5\"/><path d=\"M10 20v-6h4v6\"/>", "chat": "<path d=\"M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z\"/>", "mega": "<path d=\"M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z\"/><path d=\"M15.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M18.5 6a9 9 0 0 1 0 12\"/>", "shield": "<path d=\"M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z\"/><path d=\"m9 12 2 2 4-4\"/>", "inbox": "<path d=\"M22 12h-6l-2 3h-4l-2-3H2\"/><path d=\"M5.5 5h13L22 12v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z\"/>", "plus": "<path d=\"M12 5v14M5 12h14\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/>", "key": "<circle cx=\"8\" cy=\"15\" r=\"4\"/><path d=\"m11 12 9-9\"/><path d=\"m16 7 3 3\"/>", "phone": "<path d=\"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z\"/>", "video": "<rect x=\"3\" y=\"6\" width=\"13\" height=\"12\" rx=\"2\"/><path d=\"m16 10 5-3v10l-5-3z\"/>", "image": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"2\"/><circle cx=\"9\" cy=\"10\" r=\"1.6\"/><path d=\"m21 16-5-5-9 9\"/>"};
+const ic=(n,z=20)=>`<svg class="i" width="${z}" height="${z}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
+
+let formMedia=[];
+const getMedia=p=>(p.media&&p.media.length)?p.media:(p.url?[{url:p.url,mt:p.mt}]:[]);
+function mediaList(){return formMedia.map((m,i)=>`<div class="mi"><span>${ic(m.mt==='video'?'video':'image',18)} ${m.mt==='video'?'فيديو':'صورة'} ${i+1}</span><button type="button" data-rmm="${i}">حذف</button></div>`).join('')}
+
+const canPost=()=>['admin','modire','mostachar'].includes(role), canManage=canPost;
+function renderNav(){$('nav').innerHTML=[['home','home'],['couns','chat'],['comp','mega'],['act','shield'],['subs','inbox']].map(([k,i])=>`<button data-tab="${k}" class="${tab===k?'on':''}"><span class="ic">${ic(i,22)}</span>${t(k)}</button>`).join('')}
+function renderMenu(){$('menu').innerHTML=['all','post','rec','ann'].map(k=>`<button data-flt="${k}" class="${flt===k?'sel':''}">${t(k)}</button>`).join('')}
+
+function renderMediaHtml(mediaArr, postId){
+  if(!mediaArr || !mediaArr.length) return '';
+  if(mediaArr.length === 1){
+    const m = mediaArr[0];
+    return `<div class="media-box">${m.mt==='video'?`<video src="${esc(m.url)}" controls playsinline preload="metadata"></video>`:`<img src="${esc(m.url)}" alt="" loading="lazy" onclick="openFullscreen('${esc(m.url)}', 'image', 0,${JSON.stringify(mediaArr).replace(/"/g, '&quot;')})">`}</div>`;
+  }
+  let html = `<div class="media-grid">`;
+  const limit = Math.min(mediaArr.length, 4);
+  for(let i=0; i<limit; i++){
+    let m = mediaArr[i];
+    if(i === 3 && mediaArr.length > 4){
+      html += `<div class="grid-item" onclick="openFullscreen('${esc(m.url)}', '${m.mt}', 3, ${JSON.stringify(mediaArr).replace(/"/g, '&quot;')})"><img src="${esc(m.url)}" alt="" loading="lazy"><div class="grid-more">+${mediaArr.length - 3}</div></div>`;
+    } else {
+      html += `<div class="grid-item" onclick="openFullscreen('${esc(m.url)}', '${m.mt}', ${i}, ${JSON.stringify(mediaArr).replace(/"/g, '&quot;')})">${m.mt==='video'?`<video src="${esc(m.url)}" preload="metadata"></video>`:`<img src="${esc(m.url)}" alt="" loading="lazy">`}</div>`;
+    }
+  }
+  html += `</div>`;
+  return html;
+}
+
+let currentFsMedia = [];
+let currentFsIdx = 0;
+
+window.openFullscreen = function(url, mt, idx=0, arr=[]){
+  currentFsMedia = arr.length ? arr : [{url, mt}];
+  currentFsIdx = idx;
+  updateFsView();
+  $('fullscreen-view').classList.add('on');
+};
+
+function updateFsView(){
+  if(!currentFsMedia.length) return;
+  const m = currentFsMedia[currentFsIdx];
+  const cnt = $('fs-content');
+  cnt.innerHTML = m.mt==='video'?`<video src="${esc(m.url)}" controls autoplay playsinline></video>`:`<img src="${esc(m.url)}" alt="">`;
+  if(currentFsMedia.length > 1){
+    $('fs-prev').style.display = 'grid';$('fs-next').style.display = 'grid';
+  } else {
+    $('fs-prev').style.display = 'none';$('fs-next').style.display = 'none';
+  }
+}
+
+$('fs-prev').onclick = () => {
+  currentFsIdx = (currentFsIdx - 1 + currentFsMedia.length) % currentFsMedia.length;
+  updateFsView();
+};
+
+$('fs-next').onclick = () => {
+  currentFsIdx = (currentFsIdx + 1) % currentFsMedia.length;
+  updateFsView();
+};
+
+$('fs-close').onclick = () =>$('fullscreen-view').classList.remove('on');
+
+function feed(){
+  const q=$('q').value.toLowerCase();
+  let list = posts.filter(p=>(flt==='all'||p.type===flt)&&(`${p.title||''} ${p.body||''}`).toLowerCase().includes(q));
+  list.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
+  let h=list.length?'':`<div class="empty">${t('empty')}</div>`;
+  h+=list.map(p=>`<div class="card ${p.pinned?'pinned':''}">
+    ${p.pinned?'<span class="pin-badge">📌 مثبت</span>':''}
+    <span class="tag ${esc(p.type)}">${t(p.type)}</span>
+    ${p.title?`<h3>${esc(p.title)}</h3>`:''}
+    ${p.body?`<p>${esc(p.body)}</p>`:''}
+    ${renderMediaHtml(getMedia(p), p.id)}
+    <div class="meta">${fmt(p.ts)}</div>
+    ${canManage()?`<div class="row">
+      <button class="b g" data-pin="${esc(p.id)}">${p.pinned?'إلغاء التثبيت':'تثبيت'}</button>
+      <button class="b g" data-edit="${esc(p.id)}">${t('edit')}</button>
+      <button class="b r" data-del="${esc(p.id)}">${delId===p.id?t('sure'):t('del')}</button>
+    </div>`:''}
+  </div>`).join('');
+  if(canPost())h+=`<button class="fab" data-new="1">${ic('plus',28)}</button>`;
+  return h;
+}
+
+function postForm(p={}){
+  formMedia=getMedia(p).map(m=>({...m}));
+  return `<h2>${p.id?t('edit'):t('newp')}</h2><input id="pt" placeholder="${t('title')}" value="${esc(p.title||'')}"><textarea id="pb" rows="4" placeholder="${t('topic')}">${esc(p.body||'')}</textarea><label>${t('media')}</label><div class="mlist" id="ml">${mediaList()}</div><input id="pf" type="file" multiple accept="image/*,video/mp4,video/webm,video/quicktime"><div id="upload-progress"><div id="upload-bar"></div></div><div id="upload-text"></div><label>${t('type')}</label><select id="pty"><option value="">${t('pick')}</option>${['post','rec','ann'].map(k=>`<option value="${k}" ${p.type===k?'selected':''}>${t(k)}</option>`).join('')}</select><div class="row"><button class="b" data-savep="${esc(p.id||'')}">${p.id?t('save'):t('publish')}</button><button class="b g" data-close="1">${t('cancel')}</button></div>`;
+}
+
+function msgForm(kind){
+  if(role==='modire' && kind==='complaint'){
+    return `<div class="card"><div class="empty">ليس لديك صلاحية في رفع شكوى بصفتك مديراً.</div></div>`;
+  }
+  if(role==='mostachar' && kind==='counselor'){
+    return `<div class="card"><div class="empty">ليس لديك صلاحية في رفع رسالة إلى المستشار بصفتك مستشاراً.</div></div>`;
+  }
+  return `<div class="card"><h2>${kind==='counselor'?ic('chat',22)+' '+t('ctitle'):ic('mega',22)+' '+t('cmtitle')}</h2><input id="mn" placeholder="${t('name')}"><input id="ms" placeholder="${t('sname')}"><input id="mc" placeholder="${t('cls')}"><input id="mp" type="tel" placeholder="${t('phone')}"><textarea id="mt" rows="5" placeholder="${t('msg')}"></textarea><button class="b" data-sendm="${kind}">${kind==='counselor'?t('send'):t('csend')}</button></div>`;
+}
+
+function star(){
+  return `<div class="card"><h2>${ic('shield',22)} ${t('act')}</h2>${role?`<p>${t('role')}: <b>${esc(role)}</b></p><div class="row"><button class="b r" data-logout="1">${t('logout')}</button></div>${role==='modire'?`<h3 style="margin-top:18px">${ic('key',20)} تغيير رموز التفعيل</h3><label>رمز الأدمين الجديد</label><input id="cA" type="password"><label>رمز المستشار الجديد</label><input id="cM" type="password"><label>رمز المدير الجديد</label><input id="cD" type="password"><div class="row"><button class="b" data-savecodes="1">حفظ الرموز</button></div>`:''}`:`<input id="cd" type="password" placeholder="${t('code')}"><button class="b" data-login="1">${t('enter')}</button>`}</div>`;
+}
+
+function subs(){
+  if(!role){
+    const myMsgs = ls('school_mine', []);
+    if(!myMsgs.length) return `<div class="empty">لم تقم بإرسال أي رسائل أو شكاوى بعد.</div>`;
+    return `<h2 style="margin-bottom:12px">رسائلي وشكاوي المرسلة</h2>` + myMsgs.map(m=>`<div class="card ${m.done?'done':''}">
+      <span class="tag">${m.kind==='counselor'?t('kc'):t('kp')}</span>
+      <h3>${esc(m.name)} ${esc(m.sname)} — ${esc(m.cls)} ${m.done?' ✅':''}</h3>
+      <p>${esc(m.text)}</p>
+      <div class="meta">${fmt(m.ts)} ${m.done?' • تمت المعالجة والرد ✅':''}</div>
+    </div>`).join('');
+  }
+  if(role==='admin')return `<div class="empty">${t('nomsg')}</div>`;
+  const list=messages.filter(m=>role==='modire'||(role==='mostachar'&&m.kind==='counselor'));
+  if(!list.length)return `<div class="empty">${t('none')}</div>`;
+  return list.map(m=>`<div class="card ${m.done?'done':''}"><span class="tag">${m.kind==='counselor'?t('kc'):t('kp')}</span><h3>${esc(m.name)} ${esc(m.sname)} — ${esc(m.cls)}</h3>${m.phone?`<div class="meta">${ic('phone',14)}${esc(m.phone)}</div>`:''}<p>${esc(m.text)}</p><div class="meta">${fmt(m.ts)}</div><div class="row"><button class="b ok" data-ok="${esc(m.id)}" data-v="${m.done?'0':'1'}">${m.done?'إلغاء المعالجة':'تمت المعالجة ✅'}</button><button class="b r" data-delm="${esc(m.id)}">${delId===m.id?t('sure'):t('del')}</button></div></div>`).join('');
+}
+
+function render(){
+  const a=$('app');$('sb').style.display=(tab==='home'||tab==='subs')?'block':'none';
+  if(tab==='home')a.innerHTML=feed();
+  else if(tab==='couns')a.innerHTML=msgForm('counselor');
+  else if(tab==='comp')a.innerHTML=msgForm('complaint');
+  else if(tab==='act')a.innerHTML=star();
+  else a.innerHTML=subs();
+  renderNav();
+  renderMenu();
+}
+
+function go(k){
+  tab=k;
+  $('menu').classList.remove('on');
+  render();
+  scrollTo(0,0);
+  if(k==='home')loadPosts();
+  if(k==='subs')loadMessages();
+}
+
+function openM(h){$('sheet').innerHTML=h;$('modal').classList.add('on')}
+function closeM(){$('modal').classList.remove('on')}
+
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('button');
+  if(!b)return;
+  const D=b.dataset;
+  
+  if(b.id==='burger'){
+    $('menu').classList.toggle('on');
+    return;
+  }
+  
+  if(!e.target.closest('#burger') && !e.target.closest('#menu')){
+    $('menu').classList.remove('on');
+  }
+
+  if(D.tab){go(D.tab);return}
+  if(D.flt){
+    flt=D.flt;
+    tab='home';
+    $('menu').classList.remove('on');
+    render();
+    return;
+  }
+  if(D.new){openM(postForm());return}
+  if(D.edit){openM(postForm(posts.find(p=>p.id===D.edit)||{}));return}
+  
+  if(D.pin){
+    const p = posts.find(x=>x.id===D.pin);
+    if(p){
+      try{await api('/api/posts/'+encodeURIComponent(p.id)+'/pin',{method:'POST'});p.pinned=!p.pinned;render();toast(p.pinned?'تم تثبيت المنشور في الأعلى':'تم إلغاء التثبيت')}catch{toast('تعذّر الحفظ')}
+    }
+    return;
+  }
+
+  if(D.rmm!==undefined){formMedia.splice(+D.rmm,1);$('ml').innerHTML=mediaList();return}
+  if(D.close){closeM();return}
+
+  if(D.savep!==undefined){
+    const type=$('pty').value;
+    if(!type){toast(t('req'));return}
+    const title=$('pt').value.trim();
+    const body=$('pb').value.trim();
+    const fileInput=$('pf');
+    
+    let media=[...formMedia];
+    const progBox = $('upload-progress');
+    const progBar = $('upload-bar');
+    const progText = $('upload-text');
+    
+    progBox.style.display='block';
+    progBar.style.width='15%';
+    progText.textContent='جاري الرفع والمعالجة...';
+
+    const processFiles=async()=>{
+      try{
+        const total=fileInput?fileInput.files.length:0;
+        for(let i=0;i<total;i++){
+          const f=fileInput.files[i];
+          progBar.style.width=(10+Math.floor((i/total)*80))+'%';
+          progText.textContent=`جارٍ رفع الملف ${i+1} من ${total}...`;
+          const r=await api('/api/upload',{method:'POST',headers:{'content-type':f.type},body:f});
+          media.push({url:r.url,mt:r.mt});
+        }
+        progBar.style.width='100%';
+        progText.textContent='جارٍ الحفظ...';
+        await api('/api/posts',{method:'POST',json:{id:D.savep||undefined,title,body,type,media}});
+      }catch(err){progBox.style.display='none';progText.textContent='';toast('فشل الرفع أو الحفظ، حاول مرة أخرى');return}
+      closeM();flt='all';tab='home';await loadPosts();toast('تم النشر بنجاح');
+    };
+    processFiles();
+    return;
+  }
+
+  if(D.del){
+    if(delId===D.del){
+      try{await api('/api/posts/'+encodeURIComponent(D.del),{method:'DELETE'});posts=posts.filter(p=>p.id!==D.del)}catch{toast('تعذّر الحذف')}
+      delId=null;
+      render();
+    } else {
+      delId=D.del;
+      render();
+    }
+    return;
+  }
+
+  if(D.login){
+    const code=$('cd').value.trim();
+    try{const r=await api('/api/login',{method:'POST',json:{code}});role=r.role;token=r.token;localStorage.setItem('school_token',token);localStorage.setItem('school_role',role);toast('تم تسجيل الدخول بنجاح');loadMessages()}catch{toast(t('bad'))}
+    return;
+  }
+
+  if(D.logout){
+    api('/api/logout',{method:'POST'}).catch(()=>{});
+    token=''; role=null; messages=[];
+    localStorage.removeItem('school_token');
+    localStorage.removeItem('school_role');
+    render();
+    return;
+  }
+
+  if(D.savecodes){
+    try{await api('/api/codes',{method:'POST',json:{admin:$('cA').value,mostachar:$('cM').value,modire:$('cD').value}});['cA','cM','cD'].forEach(i=>$(i).value='');toast('تم تحديث الرموز بنجاح')}catch{toast('تعذّر الحفظ')}
+    return;
+  }
+
+  if(D.sendm){
+    const g=i=>$(i).value.trim();
+    const d={
+      id: 'msg_'+Date.now(),
+      kind: D.sendm,
+      name: g('mn'),
+      sname: g('ms'),
+      cls: g('mc'),
+      phone: g('mp'),
+      text: g('mt'),
+      done: false,
+      ts: Date.now()
+    };
+    if(!d.name||!d.sname||!d.cls||!d.text){toast(t('req'));return}
+    try{const r=await api('/api/messages',{method:'POST',json:d});d.id=r.id}catch{toast('تعذّر الإرسال');return}
+    const myMsgs = ls('school_mine', []);
+    myMsgs.unshift(d);
+    ss('school_mine', myMsgs);
+
+    toast(t('sent'));
+    go('subs');
+    return;
+  }
+
+  if(D.ok){
+    const m=messages.find(x=>x.id===D.ok);
+    if(m){
+      try{await api('/api/messages/'+encodeURIComponent(m.id)+'/done',{method:'POST',json:{v:D.v==='1'}});m.done=(D.v==='1');render()}catch{toast('تعذّر الحفظ')}
+    }
+    return;
+  }
+
+  if(D.delm){
+    if(delId===D.delm){
+      try{await api('/api/messages/'+encodeURIComponent(D.delm),{method:'DELETE'});messages=messages.filter(m=>m.id!==D.delm)}catch{toast('تعذّر الحذف')}
+      delId=null;
+      render();
+    } else {
+      delId=D.delm;
+      render();
+    }
+    return;
+  }
+});
+
+$('sb').insertAdjacentHTML('afterbegin',ic('search',18));
+$('q').oninput=()=>render();$('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeM()});
+window.addEventListener('click', e => {
+  if(!e.target.closest('#burger') && !e.target.closest('#menu')){
+    $('menu').classList.remove('on');
+  }
+});
+
+render();
+(async()=>{if(token){try{role=(await api('/api/me')).role}catch{}}await loadPosts();loadMessages()})();
+
+let vid='';
+try{vid=localStorage.getItem('school_vid')||'';if(!vid){vid=(crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random().toString(36).slice(2)).replace(/[^a-z0-9]/gi,'');localStorage.setItem('school_vid',vid)}}catch{vid=Math.random().toString(36).slice(2)+Date.now().toString(36)}
+async function ping(){
+  if(document.hidden)return;
+  try{const r=await fetch(API+'/api/ping',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({vid})});const d=await r.json();if(d.total!==undefined){$('st-total').textContent=d.total;$('st-act').textContent=d.active}}catch{}
+}
+ping();setInterval(ping,45000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)ping()});
+</script>
+</body>
+</html>
